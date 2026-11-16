@@ -129,7 +129,7 @@ Negociações --> DB
       </a>
     </td>
     <td align="center">
-      <img src="assets/Joao.png" width="120px;" alt="Foto do Lucas"/><br>
+      <img src="assets/Joao.png" width="100px;" alt="Foto do Lucas"/><br>
       <a href="https://www.linkedin.com/in/joão-lucas-silva-paz-141912441?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank">
         <sub><b>João Lucas</b></sub>
       </a>
