@@ -129,15 +129,15 @@ Negociações --> DB
       </a>
     </td>
     <td align="center">
-      <img src="assets/Lucas.png" width="120px;" alt="Foto do Lucas"/><br>
-      <a href="https://www.linkedin.com/in/lucas-hudson-1245bb409/" target="_blank">
-        <sub><b>Lucas Hudson</b></sub>
+      <img src="assets/Joao.png" width="120px;" alt="Foto do Lucas"/><br>
+      <a href="https://www.linkedin.com/in/joão-lucas-silva-paz-141912441?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank">
+        <sub><b>João Lucas</b></sub>
       </a>
     </td>
     <td align="center">
-      <img src="assets/Marcela.png" width="120px;" alt="Foto da Marcela"/><br>
-      <a href= "https://www.linkedin.com/in/marcela-cristine-cantalice-santos-994309410/" target="_blank">
-        <sub><b>Marcela Cantalice</b></sub>
+      <img src="assets/Lucas.png" width="120px;" alt="Foto da Marcela"/><br>
+      <a href= "https://www.linkedin.com/in/lucas-hudson-1245bb409/" target="_blank">
+        <sub><b>Lucas Hudson</b></sub>
       </a>
     </td>
     <td align="center">
