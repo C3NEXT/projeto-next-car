@@ -1,6 +1,16 @@
-const API_USUARIO = "http://localhost:8080/usuarios";
-const API_VEICULO = "http://localhost:8080/veiculos";
-const API_VENDA = "http://localhost:8080/vendas";
+const API_BASE_URL = "http://localhost:3606";
+const API_USUARIO = `${API_BASE_URL}/usuarios`;
+const API_VEICULO = `${API_BASE_URL}/veiculos`;
+const API_VENDA = `${API_BASE_URL}/vendas`;
+
+async function getApiError(response) {
+    try {
+        const body = await response.json();
+        return body.message || body.error || response.statusText;
+    } catch {
+        return response.statusText || `HTTP ${response.status}`;
+    }
+}
 
 
 const themeToggleBtn = document.getElementById('theme-toggle');
@@ -98,6 +108,7 @@ function closeModal(id) {
 async function loadVeiculos() {
     try {
         const res = await fetch(API_VEICULO);
+        if (!res.ok) throw new Error(await getApiError(res));
         const veiculos = await res.json();
         const tbody = document.getElementById('veiculos-table-body');
         tbody.innerHTML = '';
@@ -122,6 +133,7 @@ async function loadVeiculos() {
         });
     } catch (err) {
         console.error("Erro ao carregar veículos:", err);
+        alert(`Não foi possível carregar os veículos. ${err.message}`);
     }
 }
 
@@ -141,14 +153,20 @@ document.getElementById('veiculo-form').addEventListener('submit', async (e) => 
     const method = id ? 'PUT' : 'POST';
     const url = id ? `${API_VEICULO}/${id}` : API_VEICULO;
 
-    await fetch(url, {
-        method: method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(veiculoData)
-    });
+    try {
+        const response = await fetch(url, {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(veiculoData)
+        });
+        if (!response.ok) throw new Error(await getApiError(response));
 
-    closeModal('veiculoModal');
-    loadVeiculos();
+        closeModal('veiculoModal');
+        await loadVeiculos();
+    } catch (err) {
+        console.error('Erro ao salvar veículo:', err);
+        alert(`Não foi possível salvar o veículo. ${err.message}`);
+    }
 });
 
 function editVeiculo(id, marca, modelo, ano, preco, tipo, status, tipoPreco) {
@@ -175,6 +193,7 @@ async function deleteVeiculo(id) {
 async function loadUsuarios() {
     try {
         const res = await fetch(API_USUARIO);
+        if (!res.ok) throw new Error(await getApiError(res));
         const usuarios = await res.json();
         const tbody = document.getElementById('usuarios-table-body');
         tbody.innerHTML = '';
@@ -194,6 +213,7 @@ async function loadUsuarios() {
         });
     } catch (err) {
         console.error("Erro ao carregar usuários:", err);
+        alert(`Não foi possível carregar os usuários. ${err.message}`);
     }
 }
 
@@ -209,14 +229,20 @@ document.getElementById('usuario-form').addEventListener('submit', async (e) => 
     const method = id ? 'PUT' : 'POST';
     const url = id ? `${API_USUARIO}/${id}` : API_USUARIO;
 
-    await fetch(url, {
-        method: method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(usuarioData)
-    });
+    try {
+        const response = await fetch(url, {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(usuarioData)
+        });
+        if (!response.ok) throw new Error(await getApiError(response));
 
-    closeModal('usuarioModal');
-    loadUsuarios();
+        closeModal('usuarioModal');
+        await loadUsuarios();
+    } catch (err) {
+        console.error('Erro ao salvar usuário:', err);
+        alert(`Não foi possível salvar o usuário. ${err.message}`);
+    }
 });
 
 function editUsuario(id, nome, login) {
@@ -239,6 +265,7 @@ async function deleteUsuario(id) {
 async function loadVendas() {
     try {
         const res = await fetch(API_VENDA);
+        if (!res.ok) throw new Error(await getApiError(res));
         const vendas = await res.json();
         const tbody = document.getElementById('vendas-table-body');
         tbody.innerHTML = '';
@@ -259,6 +286,7 @@ async function loadVendas() {
         });
     } catch (err) {
         console.error("Erro ao carregar vendas:", err);
+        alert(`Não foi possível carregar as vendas. ${err.message}`);
     }
 }
 
