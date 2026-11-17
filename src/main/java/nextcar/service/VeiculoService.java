@@ -3,7 +3,10 @@ package nextcar.service;
 import jakarta.persistence.EntityNotFoundException;
 import nextcar.model.Veiculo;
 import nextcar.repository.VeiculoRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @Service
@@ -24,7 +27,7 @@ public class VeiculoService {
     public List<Veiculo> find() {
         return veiculoRepository.findAll();
     }
-
+    
     public Veiculo update(Veiculo veiculoNovo, Long id) {
         Veiculo existe = buscarPorId(id);
         double precoFinal = strategyFactory.getStrategy(veiculoNovo.getTipoPreco()).calcularPreco(veiculoNovo.getPreco());
@@ -47,5 +50,12 @@ public class VeiculoService {
     public Veiculo buscarPorId(Long id) {
         return veiculoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Veiculo nao encontrado: " + id));
+    }
+
+    public Veiculo findById(Long id) {
+        return veiculoRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Veículo não encontrado"
+                ));
     }
 }

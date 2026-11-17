@@ -36,4 +36,9 @@ public class VeiculoController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+    @GetMapping("/{id}")
+    public Veiculo findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
 }
